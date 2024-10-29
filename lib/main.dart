@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             onPressed: () {
                               _reduceCounter(1);
                             },
-                            child: const Text('-'),
+                            child: const Text('-1'),
                           ),
                           Container(
                             child: Text('$_counter1'),
@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               onPressed: () {
                                 _incrementCounter(1);
                               },
-                              child: const Text('+')),
+                              child: const Text('+1')),
                         ],
                       ),
                     ),
@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           onPressed: () {
                             _reduceCounter(2);
                           },
-                          child: const Text('-'),
+                          child: const Text('-1'),
                         ),
                         Container(
                           child: Text('$_counter2'),
@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             onPressed: () {
                               _incrementCounter(2);
                             },
-                            child: const Text('+')),
+                            child: const Text('+1')),
                       ],
                     ),
                   ),
