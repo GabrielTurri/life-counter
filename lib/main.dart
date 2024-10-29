@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_counter/player_life.dart';
 
 void main() {
   runApp(const MyApp());
@@ -66,38 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: Container(
-                  decoration: BoxDecoration(color: Colors.orange[300]),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              _reduceCounter(1);
-                            },
-                            child: const Text('-1'),
-                          ),
-                          Container(
-                            child: Text('$_counter1'),
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 32, vertical: 16),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                _incrementCounter(1);
-                              },
-                              child: const Text('+1')),
-                        ],
-                      ),
-                    ),
-                  )),
+              child: Player1Life(),
             ),
             Expanded(
               child: Container(
