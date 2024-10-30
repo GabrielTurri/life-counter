@@ -11,7 +11,7 @@ class Player1LifeState extends State<Player1Life> {
   int _counter1 = 20;
   int _counter2 = 20;
 
-  _resetCounters() {
+  resetarVida() {
     setState(() {
       _counter1 = 20;
       _counter2 = 20;
@@ -47,13 +47,19 @@ class Player1LifeState extends State<Player1Life> {
                   child: const Text('-1'),
                 ),
                 Container(
-                  child: Text('$_counter1'),
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.orange[400],
                       borderRadius: BorderRadius.circular(8)),
+                  child: Text(
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 24),
+                    '$_counter1',
+                  ),
                 ),
                 ElevatedButton(
                     onPressed: () {
