@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: PlayerLife(lifeColor: Colors.green[300], bgColor: Colors.green[400],),
             ),
             Expanded(
-              child: PlayerLife(lifeColor: Colors.blue[300], bgColor: Colors.blue[400]),
+              child: PlayerLife(lifeColor: Colors.purple[300], bgColor: Colors.purple[400]),
               ),
           ]),
       floatingActionButton: FloatingActionButton(

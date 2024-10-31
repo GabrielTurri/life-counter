@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class PlayerLife extends StatefulWidget {
   final Color? lifeColor;
   final Color? bgColor;
-  const PlayerLife({super.key,  required this.lifeColor , required this.bgColor});
+  
+
+  PlayerLife({super.key,  required this.lifeColor , required this.bgColor});
 
   
   @override
@@ -14,22 +16,21 @@ class PlayerLife extends StatefulWidget {
 class _PlayerLifeState extends State<PlayerLife> {
   int vida = 20;
 
-
   resetarVida() {
     setState(() {
       vida = 20;
     });
   }
 
-  _reduzirVida(player) {
+  _reduzirVida(int valor) {
     setState(() {
-      vida--;
+      vida -= valor;
     });
   }
 
-  _aumentarVida(player) {
+  _aumentarVida(int valor) {
     setState(() {
-      vida++;
+      vida += valor;
     });
   }
 
@@ -39,16 +40,42 @@ class _PlayerLifeState extends State<PlayerLife> {
         decoration: BoxDecoration(color: widget.bgColor),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
+            padding: const EdgeInsets.symmetric(horizontal: 64),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    _reduzirVida(1);
-                  },
-                  child: const Text('-1'),
-                ),
+                // const Column(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //   Text('teste'),
+                //   Text('teste'),
+                //   Text('teste'),
+                // ],),                
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          _reduzirVida(1);
+                        },
+                        child: const Text('-1'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          _reduzirVida(2);
+                        },
+                        child: const Text('-2'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          _reduzirVida(3);
+                        },
+                        child: const Text('-3'),
+                      ),
+                    ],
+                  ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   padding:
@@ -64,11 +91,30 @@ class _PlayerLifeState extends State<PlayerLife> {
                     '$vida',
                   ),
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      _aumentarVida(1);
-                    },
-                    child: const Text('+1')),
+                Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          _aumentarVida(1);
+                        },
+                        child: const Text('+1'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          _aumentarVida(2);
+                        },
+                        child: const Text('+2'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          _aumentarVida(3);
+                        },
+                        child: const Text('+3'),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
