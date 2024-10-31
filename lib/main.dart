@@ -67,46 +67,16 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: Player1Life(),
+              child: PlayerLife(lifeColor: Colors.green[300], bgColor: Colors.green[400],),
             ),
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(color: Colors.blue[300]),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            _reduceCounter(2);
-                          },
-                          child: const Text('-1'),
-                        ),
-                        Container(
-                          child: Text('$_counter2'),
-                          margin: const EdgeInsets.symmetric(horizontal: 16),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 32, vertical: 16),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8)),
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              _incrementCounter(2);
-                            },
-                            child: const Text('+1')),
-                      ],
-                    ),
-                  ),
-                ),
+              child: PlayerLife(lifeColor: Colors.blue[300], bgColor: Colors.blue[400]),
               ),
-            ),
           ]),
       floatingActionButton: FloatingActionButton(
-        onPressed: _resetCounters,
+
+        onPressed: () {
+        },
         tooltip: 'Reset',
         child: const Icon(Icons.restart_alt_outlined),
       ), // This trailing comma makes auto-formatting nicer for build methods.

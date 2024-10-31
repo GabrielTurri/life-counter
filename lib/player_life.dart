@@ -1,39 +1,42 @@
 import 'package:flutter/material.dart';
 
-class Player1Life extends StatefulWidget {
+class PlayerLife extends StatefulWidget {
+  final Color? lifeColor;
+  final Color? bgColor;
+  const PlayerLife({super.key,  required this.lifeColor , required this.bgColor});
+
+  
   @override
-  State<Player1Life> createState() {
-    return Player1LifeState();
-  }
+  State<PlayerLife> createState() => _PlayerLifeState();
+  
 }
 
-class Player1LifeState extends State<Player1Life> {
-  int _counter1 = 20;
-  int _counter2 = 20;
+class _PlayerLifeState extends State<PlayerLife> {
+  int vida = 20;
+
 
   resetarVida() {
     setState(() {
-      _counter1 = 20;
-      _counter2 = 20;
+      vida = 20;
     });
   }
 
-  _reduceCounter(player) {
+  _reduzirVida(player) {
     setState(() {
-      (player == 1) ? _counter1-- : _counter2--;
+      vida--;
     });
   }
 
-  _incrementCounter(player) {
+  _aumentarVida(player) {
     setState(() {
-      (player == 1) ? _counter1++ : _counter2++;
+      vida++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(color: Colors.orange[300]),
+        decoration: BoxDecoration(color: widget.bgColor),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -42,7 +45,7 @@ class Player1LifeState extends State<Player1Life> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    _reduceCounter(1);
+                    _reduzirVida(1);
                   },
                   child: const Text('-1'),
                 ),
@@ -51,19 +54,19 @@ class Player1LifeState extends State<Player1Life> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                   decoration: BoxDecoration(
-                      color: Colors.orange[400],
+                      color: widget.lifeColor,
                       borderRadius: BorderRadius.circular(8)),
                   child: Text(
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
                         fontSize: 24),
-                    '$_counter1',
+                    '$vida',
                   ),
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      _incrementCounter(1);
+                      _aumentarVida(1);
                     },
                     child: const Text('+1')),
               ],
