@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import './life_button.dart';
 
 class PlayerLife extends StatefulWidget {
   final Color? lifeColor;
   final Color? bgColor;
   
 
-  PlayerLife({super.key,  required this.lifeColor , required this.bgColor});
+  const PlayerLife({super.key,  required this.lifeColor , required this.bgColor});
 
   
   @override
@@ -22,13 +23,7 @@ class _PlayerLifeState extends State<PlayerLife> {
     });
   }
 
-  _reduzirVida(int valor) {
-    setState(() {
-      vida -= valor;
-    });
-  }
-
-  _aumentarVida(int valor) {
+  alterarVida(int valor){
     setState(() {
       vida += valor;
     });
@@ -43,37 +38,14 @@ class _PlayerLifeState extends State<PlayerLife> {
             padding: const EdgeInsets.symmetric(horizontal: 64),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // const Column(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: [
-                //   Text('teste'),
-                //   Text('teste'),
-                //   Text('teste'),
-                // ],),                
+              children: [  
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          _reduzirVida(1);
-                        },
-                        child: const Text('-1'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _reduzirVida(2);
-                        },
-                        child: const Text('-2'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _reduzirVida(3);
-                        },
-                        child: const Text('-3'),
-                      ),
+                      LifeButton(texto: '-1', onPressed: () { alterarVida(-1); }),
+                      LifeButton(texto: '-2', onPressed: () { alterarVida(-2); }),
+                      LifeButton(texto: '-3', onPressed: () { alterarVida(-3); }),
                     ],
                   ),
                 Container(
@@ -95,24 +67,9 @@ class _PlayerLifeState extends State<PlayerLife> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          _aumentarVida(1);
-                        },
-                        child: const Text('+1'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _aumentarVida(2);
-                        },
-                        child: const Text('+2'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _aumentarVida(3);
-                        },
-                        child: const Text('+3'),
-                      ),
+                      LifeButton(texto: '+1', onPressed: () { alterarVida(1); }),
+                      LifeButton(texto: '+2', onPressed: () { alterarVida(2); }),
+                      LifeButton(texto: '+3', onPressed: () { alterarVida(3); }),
                     ],
                   ),
               ],
