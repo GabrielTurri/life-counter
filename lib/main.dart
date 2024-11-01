@@ -38,18 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  _reduceCounter(player) {
-    setState(() {
-      (player == 1) ? _counter1-- : _counter2--;
-    });
-  }
-
-  _incrementCounter(player) {
-    setState(() {
-      (player == 1) ? _counter1++ : _counter2++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,16 +55,18 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: PlayerLife(lifeColor: Colors.green[300], bgColor: Colors.green[400],),
+              child: PlayerLife(
+                lifeColor: Colors.green[300],
+                bgColor: Colors.green[400],
+              ),
             ),
             Expanded(
-              child: PlayerLife(lifeColor: Colors.purple[300], bgColor: Colors.purple[400]),
-              ),
+              child: PlayerLife(
+                  lifeColor: Colors.purple[300], bgColor: Colors.purple[400]),
+            ),
           ]),
       floatingActionButton: FloatingActionButton(
-
-        onPressed: () {
-        },
+        onPressed: () {},
         tooltip: 'Reset',
         child: const Icon(Icons.restart_alt_outlined),
       ), // This trailing comma makes auto-formatting nicer for build methods.

@@ -4,14 +4,11 @@ import './life_button.dart';
 class PlayerLife extends StatefulWidget {
   final Color? lifeColor;
   final Color? bgColor;
-  
 
-  const PlayerLife({super.key,  required this.lifeColor , required this.bgColor});
+  const PlayerLife({super.key, required this.lifeColor, required this.bgColor});
 
-  
   @override
   State<PlayerLife> createState() => _PlayerLifeState();
-  
 }
 
 class _PlayerLifeState extends State<PlayerLife> {
@@ -23,7 +20,7 @@ class _PlayerLifeState extends State<PlayerLife> {
     });
   }
 
-  alterarVida(int valor){
+  alterarVida(int valor) {
     setState(() {
       vida += valor;
     });
@@ -38,16 +35,31 @@ class _PlayerLifeState extends State<PlayerLife> {
             padding: const EdgeInsets.symmetric(horizontal: 64),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [  
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      LifeButton(texto: '-1', onPressed: () { alterarVida(-1); }),
-                      LifeButton(texto: '-2', onPressed: () { alterarVida(-2); }),
-                      LifeButton(texto: '-3', onPressed: () { alterarVida(-3); }),
-                    ],
-                  ),
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LifeButton(
+                        texto: '-1',
+                        onPressed: () {
+                          alterarVida(-1);
+                        },
+                        color: widget.bgColor),
+                    LifeButton(
+                        texto: '-2',
+                        onPressed: () {
+                          alterarVida(-2);
+                        },
+                        color: widget.bgColor),
+                    LifeButton(
+                        texto: '-3',
+                        onPressed: () {
+                          alterarVida(-3);
+                        },
+                        color: widget.bgColor),
+                  ],
+                ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   padding:
@@ -64,14 +76,29 @@ class _PlayerLifeState extends State<PlayerLife> {
                   ),
                 ),
                 Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      LifeButton(texto: '+1', onPressed: () { alterarVida(1); }),
-                      LifeButton(texto: '+2', onPressed: () { alterarVida(2); }),
-                      LifeButton(texto: '+3', onPressed: () { alterarVida(3); }),
-                    ],
-                  ),
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LifeButton(
+                        texto: '+1',
+                        onPressed: () {
+                          alterarVida(1);
+                        },
+                        color: widget.bgColor),
+                    LifeButton(
+                        texto: '+2',
+                        onPressed: () {
+                          alterarVida(2);
+                        },
+                        color: widget.bgColor),
+                    LifeButton(
+                        texto: '+3',
+                        onPressed: () {
+                          alterarVida(3);
+                        },
+                        color: widget.bgColor),
+                  ],
+                ),
               ],
             ),
           ),
