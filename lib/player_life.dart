@@ -4,25 +4,31 @@ import './life_button.dart';
 class PlayerLife extends StatefulWidget {
   final Color? lifeColor;
   final Color? bgColor;
+  final int vidaInicial;
+  int vida;
 
-  const PlayerLife({super.key, required this.lifeColor, required this.bgColor});
+  PlayerLife({
+    Key? key,
+    required this.lifeColor,
+    required this.bgColor,
+    required this.vidaInicial,
+  })  : vida = vidaInicial,
+        super(key: key);
 
   @override
-  State<PlayerLife> createState() => _PlayerLifeState();
+  PlayerLifeState createState() => PlayerLifeState();
 }
 
-class _PlayerLifeState extends State<PlayerLife> {
-  int vida = 20;
-
+class PlayerLifeState extends State<PlayerLife> {
   resetarVida() {
     setState(() {
-      vida = 20;
+      widget.vida = widget.vidaInicial;
     });
   }
 
   alterarVida(int valor) {
     setState(() {
-      vida += valor;
+      widget.vida += valor;
     });
   }
 
@@ -72,7 +78,7 @@ class _PlayerLifeState extends State<PlayerLife> {
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
                         fontSize: 24),
-                    '$vida',
+                    widget.vida.toString(),
                   ),
                 ),
                 Column(

@@ -7,6 +7,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  final int vidaInicial = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter1 = 20;
-  int _counter2 = 20;
-
-  _resetCounters() {
-    setState(() {
-      _counter1 = 20;
-      _counter2 = 20;
-    });
-  }
+  final GlobalKey<PlayerLifeState> player1Key = GlobalKey<PlayerLifeState>();
+  final GlobalKey<PlayerLifeState> player2Key = GlobalKey<PlayerLifeState>();
 
   @override
   Widget build(BuildContext context) {
@@ -56,20 +50,29 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: PlayerLife(
+                key: player1Key,
                 lifeColor: Colors.green[300],
                 bgColor: Colors.green[400],
+                vidaInicial: 20,
               ),
             ),
             Expanded(
               child: PlayerLife(
-                  lifeColor: Colors.purple[300], bgColor: Colors.purple[400]),
+                key: player2Key,
+                lifeColor: Colors.purple[300],
+                bgColor: Colors.purple[400],
+                vidaInicial: 20,
+              ),
             ),
           ]),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          player1Key.currentState?.resetarVida();
+          player2Key.currentState?.resetarVida();
+        },
         tooltip: 'Reset',
         child: const Icon(Icons.restart_alt_outlined),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
