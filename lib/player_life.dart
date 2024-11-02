@@ -6,6 +6,7 @@ class PlayerLife extends StatefulWidget {
   final Color? bgColor;
   final int vidaInicial;
   int vida;
+  var histVida = [];
 
   PlayerLife({
     Key? key,
@@ -23,24 +24,50 @@ class PlayerLifeState extends State<PlayerLife> {
   resetarVida() {
     setState(() {
       widget.vida = widget.vidaInicial;
+      widget.histVida.clear();
     });
   }
 
   alterarVida(int valor) {
     setState(() {
       widget.vida += valor;
+      (valor > 0)
+          ? widget.histVida.add('+$valor')
+          : widget.histVida.add('$valor');
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(color: widget.bgColor),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 64),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      decoration: BoxDecoration(color: widget.bgColor),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            SizedBox(
+              height: 400,
+              width: 60,
+              child: Scrollbar(
+                trackVisibility: true,
+                scrollbarOrientation: ScrollbarOrientation.right,
+                child: ListView.builder(
+                    reverse: true,
+                    itemCount: widget.histVida.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        minTileHeight: 4,
+                        title: Text(
+                          widget.histVida[index],
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w500),
+                        ),
+                      );
+                    }),
+              ),
+            ),
+            Row(
               children: [
                 Column(
                   mainAxisSize: MainAxisSize.min,
@@ -68,17 +95,19 @@ class PlayerLifeState extends State<PlayerLife> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                  width: 72,
+                  height: 72,
                   decoration: BoxDecoration(
                       color: widget.lifeColor,
                       borderRadius: BorderRadius.circular(8)),
-                  child: Text(
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 24),
-                    widget.vida.toString(),
+                  child: Center(
+                    child: Text(
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 24),
+                      widget.vida.toString(),
+                    ),
                   ),
                 ),
                 Column(
@@ -107,7 +136,9 @@ class PlayerLifeState extends State<PlayerLife> {
                 ),
               ],
             ),
-          ),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }
