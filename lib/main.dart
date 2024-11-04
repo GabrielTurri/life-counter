@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_counter/player_life_board.dart';
+import 'package:life_counter/player_life_container.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,10 +29,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final GlobalKey<PlayerLifeBoardState> player1Key =
-      GlobalKey<PlayerLifeBoardState>();
-  final GlobalKey<PlayerLifeBoardState> player2Key =
-      GlobalKey<PlayerLifeBoardState>();
+  final GlobalKey<PlayerLifeContainerState> player1Key =
+      GlobalKey<PlayerLifeContainerState>();
+  final GlobalKey<PlayerLifeContainerState> player2Key =
+      GlobalKey<PlayerLifeContainerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Expanded(
-            child: PlayerLifeBoard(
+            child: PlayerLifeContainer(
               key: player1Key,
               lifeColor: Colors.green[300],
               bgColor: Colors.green[400],
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-            child: PlayerLifeBoard(
+            child: PlayerLifeContainer(
               key: player2Key,
               lifeColor: Colors.purple[300],
               bgColor: Colors.purple[400],

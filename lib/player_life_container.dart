@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:life_counter/life_history.dart';
 import './player_life.dart';
 
-class PlayerLifeBoard extends StatefulWidget {
+class PlayerLifeContainer extends StatefulWidget {
   final Color? lifeColor;
   final Color? bgColor;
   final int vidaInicial;
   int vida;
   var histVida = [];
 
-  PlayerLifeBoard({
+  PlayerLifeContainer({
     super.key,
     required this.lifeColor,
     required this.bgColor,
@@ -17,10 +17,10 @@ class PlayerLifeBoard extends StatefulWidget {
   }) : vida = vidaInicial;
 
   @override
-  PlayerLifeBoardState createState() => PlayerLifeBoardState();
+  PlayerLifeContainerState createState() => PlayerLifeContainerState();
 }
 
-class PlayerLifeBoardState extends State<PlayerLifeBoard> {
+class PlayerLifeContainerState extends State<PlayerLifeContainer> {
   resetarVida() {
     setState(() {
       widget.vida = widget.vidaInicial;
