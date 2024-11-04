@@ -7,12 +7,14 @@ class PlayerLife extends StatefulWidget {
   final int vidaInicial;
   int vida;
   var histVida = [];
+  final Function alterarVida;
 
   PlayerLife({
     super.key,
     required this.lifeColor,
     required this.bgColor,
     required this.vidaInicial,
+    required this.alterarVida
   }) : vida = vidaInicial;
 
   @override
@@ -20,21 +22,6 @@ class PlayerLife extends StatefulWidget {
 }
 
 class PlayerLifeState extends State<PlayerLife> {
-  resetarVida() {
-    setState(() {
-      widget.vida = widget.vidaInicial;
-      widget.histVida.clear();
-    });
-  }
-
-  alterarVida(int valor) {
-    setState(() {
-      widget.vida += valor;
-      (valor > 0)
-          ? widget.histVida.add('+$valor')
-          : widget.histVida.add('$valor');
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,19 +34,19 @@ class PlayerLifeState extends State<PlayerLife> {
             LifeButton(
                 texto: '-1',
                 onPressed: () {
-                  alterarVida(-1);
-                },
+                  widget.alterarVida(-1);
+                  },
                 color: widget.bgColor),
             LifeButton(
                 texto: '-2',
                 onPressed: () {
-                  alterarVida(-2);
+                  widget.alterarVida(-2);
                 },
                 color: widget.bgColor),
             LifeButton(
                 texto: '-3',
                 onPressed: () {
-                  alterarVida(-3);
+                  widget.alterarVida(-3);
                 },
                 color: widget.bgColor),
           ],
@@ -87,19 +74,19 @@ class PlayerLifeState extends State<PlayerLife> {
             LifeButton(
                 texto: '+1',
                 onPressed: () {
-                  alterarVida(1);
+                  widget.alterarVida(1);
                 },
                 color: widget.bgColor),
             LifeButton(
                 texto: '+2',
                 onPressed: () {
-                  alterarVida(2);
+                  widget.alterarVida(2);
                 },
                 color: widget.bgColor),
             LifeButton(
                 texto: '+3',
                 onPressed: () {
-                  alterarVida(3);
+                  widget.alterarVida(3);
                 },
                 color: widget.bgColor),
           ],
@@ -107,4 +94,4 @@ class PlayerLifeState extends State<PlayerLife> {
       ],
     );
   }
-}
+  }

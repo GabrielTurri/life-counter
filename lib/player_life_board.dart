@@ -28,6 +28,15 @@ class PlayerLifeBoardState extends State<PlayerLifeBoard> {
     });
   }
 
+  void alterarVida(int valor) {
+    setState(() {
+      widget.vida += valor;
+      (valor > 0)
+          ? widget.histVida.add('+$valor')
+          : widget.histVida.add('$valor');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,6 +55,7 @@ class PlayerLifeBoardState extends State<PlayerLifeBoard> {
               lifeColor: widget.lifeColor,
               bgColor: widget.bgColor,
               vidaInicial: widget.vidaInicial,
+              alterarVida:  alterarVida,
             )
           ],
         ),
