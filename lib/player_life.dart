@@ -1,36 +1,34 @@
 import 'package:flutter/material.dart';
+import './life_button.dart';
 
 class PlayerLife extends StatefulWidget {
   final Color? lifeColor;
   final Color? bgColor;
-  
+  final int vidaInicial;
+  int vida;
 
-  PlayerLife({super.key,  required this.lifeColor , required this.bgColor});
+  PlayerLife({
+    Key? key,
+    required this.lifeColor,
+    required this.bgColor,
+    required this.vidaInicial,
+  })  : vida = vidaInicial,
+        super(key: key);
 
-  
   @override
-  State<PlayerLife> createState() => _PlayerLifeState();
-  
+  PlayerLifeState createState() => PlayerLifeState();
 }
 
-class _PlayerLifeState extends State<PlayerLife> {
-  int vida = 20;
-
+class PlayerLifeState extends State<PlayerLife> {
   resetarVida() {
     setState(() {
-      vida = 20;
+      widget.vida = widget.vidaInicial;
     });
   }
 
-  _reduzirVida(int valor) {
+  alterarVida(int valor) {
     setState(() {
-      vida -= valor;
-    });
-  }
-
-  _aumentarVida(int valor) {
-    setState(() {
-      vida += valor;
+      widget.vida += valor;
     });
   }
 
@@ -44,38 +42,30 @@ class _PlayerLifeState extends State<PlayerLife> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // const Column(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: [
-                //   Text('teste'),
-                //   Text('teste'),
-                //   Text('teste'),
-                // ],),                
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LifeButton(
+                        texto: '-1',
                         onPressed: () {
-                          _reduzirVida(1);
+                          alterarVida(-1);
                         },
-                        child: const Text('-1'),
-                      ),
-                      ElevatedButton(
+                        color: widget.bgColor),
+                    LifeButton(
+                        texto: '-2',
                         onPressed: () {
-                          _reduzirVida(2);
+                          alterarVida(-2);
                         },
-                        child: const Text('-2'),
-                      ),
-                      ElevatedButton(
+                        color: widget.bgColor),
+                    LifeButton(
+                        texto: '-3',
                         onPressed: () {
-                          _reduzirVida(3);
+                          alterarVida(-3);
                         },
-                        child: const Text('-3'),
-                      ),
-                    ],
-                  ),
+                        color: widget.bgColor),
+                  ],
+                ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   padding:
@@ -88,33 +78,33 @@ class _PlayerLifeState extends State<PlayerLife> {
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
                         fontSize: 24),
-                    '$vida',
+                    widget.vida.toString(),
                   ),
                 ),
                 Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LifeButton(
+                        texto: '+1',
                         onPressed: () {
-                          _aumentarVida(1);
+                          alterarVida(1);
                         },
-                        child: const Text('+1'),
-                      ),
-                      ElevatedButton(
+                        color: widget.bgColor),
+                    LifeButton(
+                        texto: '+2',
                         onPressed: () {
-                          _aumentarVida(2);
+                          alterarVida(2);
                         },
-                        child: const Text('+2'),
-                      ),
-                      ElevatedButton(
+                        color: widget.bgColor),
+                    LifeButton(
+                        texto: '+3',
                         onPressed: () {
-                          _aumentarVida(3);
+                          alterarVida(3);
                         },
-                        child: const Text('+3'),
-                      ),
-                    ],
-                  ),
+                        color: widget.bgColor),
+                  ],
+                ),
               ],
             ),
           ),
