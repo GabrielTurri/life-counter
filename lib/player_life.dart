@@ -9,12 +9,11 @@ class PlayerLife extends StatefulWidget {
   var histVida = [];
 
   PlayerLife({
-    Key? key,
+    super.key,
     required this.lifeColor,
     required this.bgColor,
     required this.vidaInicial,
-  })  : vida = vidaInicial,
-        super(key: key);
+  }) : vida = vidaInicial;
 
   @override
   PlayerLifeState createState() => PlayerLifeState();
@@ -42,16 +41,18 @@ class PlayerLifeState extends State<PlayerLife> {
     return Container(
       decoration: BoxDecoration(color: widget.bgColor),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(
-              height: 400,
-              width: 60,
-              child: Scrollbar(
-                trackVisibility: true,
-                scrollbarOrientation: ScrollbarOrientation.right,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Container(
+                height: 400,
+                width: 80,
+                decoration: BoxDecoration(
+                    color: widget.lifeColor,
+                    borderRadius: BorderRadius.circular(8)),
                 child: ListView.builder(
                     reverse: true,
                     itemCount: widget.histVida.length,
@@ -59,6 +60,7 @@ class PlayerLifeState extends State<PlayerLife> {
                       return ListTile(
                         minTileHeight: 4,
                         title: Text(
+                          textAlign: TextAlign.end,
                           widget.histVida[index],
                           style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.w500),
