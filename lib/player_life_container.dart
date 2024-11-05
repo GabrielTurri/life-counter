@@ -54,7 +54,7 @@ class PlayerLifeContainerState extends State<PlayerLifeContainer> {
             PlayerLife(
               lifeColor: widget.lifeColor,
               bgColor: widget.bgColor,
-              vidaInicial: widget.vidaInicial,
+              vida: widget.vida,
               alterarVida:  alterarVida,
             )
           ],
