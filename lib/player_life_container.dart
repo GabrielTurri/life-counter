@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:life_counter/life_history.dart';
 import './player_life.dart';
@@ -8,6 +10,8 @@ class PlayerLifeContainer extends StatefulWidget {
   final int vidaInicial;
   int vida;
   var histVida = [];
+  int calculoVida = 0;
+  int vidaAlterada = 0;
 
   PlayerLifeContainer({
     super.key,
@@ -25,15 +29,41 @@ class PlayerLifeContainerState extends State<PlayerLifeContainer> {
     setState(() {
       widget.vida = widget.vidaInicial;
       widget.histVida.clear();
+      widget.vidaAlterada = 0;
     });
   }
+
+  final _timer = TimerVida(milliseconds: 1000);
 
   void alterarVida(int valor) {
     setState(() {
       widget.vida += valor;
-      (valor > 0)
-          ? widget.histVida.add('+$valor')
-          : widget.histVida.add('$valor');
+      widget.calculoVida += valor;
+    });
+
+    _timer.run(() {
+      calcularVida();
+    });
+    // Future.delayed(const _timer, () {
+    //   setState(() {
+    //     if (widget.calculoVida != 0) {
+    //       (widget.calculoVida > 0)
+    //           ? widget.histVida.add('+${widget.calculoVida}')
+    //           : widget.histVida.add('${widget.calculoVida}');
+    //     }
+    //     widget.calculoVida = 0;
+    //   });
+    // });
+  }
+
+  void calcularVida() {
+    setState(() {
+      if (widget.calculoVida != 0) {
+        (widget.calculoVida > 0)
+            ? widget.histVida.add('+${widget.calculoVida}')
+            : widget.histVida.add('${widget.calculoVida}');
+      }
+      widget.calculoVida = 0;
     });
   }
 
@@ -55,11 +85,26 @@ class PlayerLifeContainerState extends State<PlayerLifeContainer> {
               lifeColor: widget.lifeColor,
               bgColor: widget.bgColor,
               vida: widget.vida,
-              alterarVida:  alterarVida,
+              alterarVida: alterarVida,
+              calculoVida: widget.calculoVida.toString(),
             )
           ],
         ),
       ),
     );
+  }
+}
+
+class TimerVida {
+  final int milliseconds;
+  Timer? _timer;
+
+  TimerVida({required this.milliseconds});
+
+  void run(VoidCallback action) {
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
   }
 }

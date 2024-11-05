@@ -5,23 +5,22 @@ class PlayerLife extends StatefulWidget {
   final Color? lifeColor;
   final Color? bgColor;
   final Function alterarVida;
-  int calculoVida = 0;
+  String calculoVida;
   int vida;
 
-  PlayerLife({
-    super.key,
-    required this.lifeColor,
-    required this.bgColor,
-    required this.alterarVida,
-    required this.vida,
-  });
+  PlayerLife(
+      {super.key,
+      required this.lifeColor,
+      required this.bgColor,
+      required this.alterarVida,
+      required this.vida,
+      required this.calculoVida});
 
   @override
   PlayerLifeState createState() => PlayerLifeState();
 }
 
 class PlayerLifeState extends State<PlayerLife> {
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -34,7 +33,7 @@ class PlayerLifeState extends State<PlayerLife> {
                 texto: '-1',
                 onPressed: () {
                   widget.alterarVida(-1);
-                  },
+                },
                 color: widget.bgColor),
             LifeButton(
                 texto: '-2',
@@ -53,13 +52,20 @@ class PlayerLifeState extends State<PlayerLife> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('${widget.calculoVida}',style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),
+            Text(
+              widget.calculoVida,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600),
+            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                  color: widget.lifeColor, borderRadius: BorderRadius.circular(8)),
+                  color: widget.lifeColor,
+                  borderRadius: BorderRadius.circular(8)),
               child: Center(
                 child: Text(
                   style: const TextStyle(
@@ -99,4 +105,4 @@ class PlayerLifeState extends State<PlayerLife> {
       ],
     );
   }
-  }
+}
