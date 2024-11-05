@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_counter/player_life.dart';
+import 'package:life_counter/player_life_container.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,8 +29,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final GlobalKey<PlayerLifeState> player1Key = GlobalKey<PlayerLifeState>();
-  final GlobalKey<PlayerLifeState> player2Key = GlobalKey<PlayerLifeState>();
+  final GlobalKey<PlayerLifeContainerState> player1Key =
+      GlobalKey<PlayerLifeContainerState>();
+  final GlobalKey<PlayerLifeContainerState> player2Key =
+      GlobalKey<PlayerLifeContainerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,26 +47,25 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: PlayerLife(
-                key: player1Key,
-                lifeColor: Colors.green[300],
-                bgColor: Colors.green[400],
-                vidaInicial: 20,
-              ),
+        children: [
+          Expanded(
+            child: PlayerLifeContainer(
+              key: player1Key,
+              lifeColor: Colors.green[300],
+              bgColor: Colors.green[400],
+              vidaInicial: 20,
             ),
-            Expanded(
-              child: PlayerLife(
-                key: player2Key,
-                lifeColor: Colors.purple[300],
-                bgColor: Colors.purple[400],
-                vidaInicial: 20,
-              ),
+          ),
+          Expanded(
+            child: PlayerLifeContainer(
+              key: player2Key,
+              lifeColor: Colors.purple[300],
+              bgColor: Colors.purple[400],
+              vidaInicial: 20,
             ),
-          ]),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           player1Key.currentState?.resetarVida();
