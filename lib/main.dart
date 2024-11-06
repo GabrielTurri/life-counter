@@ -67,13 +67,55 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          player1Key.currentState?.resetarVida();
-          player2Key.currentState?.resetarVida();
-        },
+        onPressed: () => _dialogBuilder(context),
+        // {
+        // player1Key.currentState?.resetarVida();
+        // player2Key.currentState?.resetarVida();
+        // },
         tooltip: 'Reset',
         child: const Icon(Icons.restart_alt_outlined),
       ),
+    );
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Atenção!'),
+          content: const Text(
+            'Deseja mesmo reiniciar os contadores de vida de ambos jogadores?\n'
+            '\n'
+            'Essa ação não poderá ser revertida.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Voltar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: Text(
+                'Confirmar!',
+                style: TextStyle(color: Colors.red[600]),
+              ),
+              onPressed: () {
+                player1Key.currentState?.resetarVida();
+                player2Key.currentState?.resetarVida();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
