@@ -11,6 +11,7 @@ class PlayerLifeContainer extends StatefulWidget {
   int vida;
   var histVida = [];
   int calculoVida = 0;
+  String textCalculoVida = '';
 
   PlayerLifeContainer({
     super.key,
@@ -38,6 +39,9 @@ class PlayerLifeContainerState extends State<PlayerLifeContainer> {
     setState(() {
       widget.vida += valor;
       widget.calculoVida += valor;
+      widget.textCalculoVida = (widget.calculoVida > 0)
+          ? '+${widget.calculoVida}'
+          : widget.calculoVida.toString();
     });
 
     _timer.run(() {
@@ -48,11 +52,11 @@ class PlayerLifeContainerState extends State<PlayerLifeContainer> {
   void calcularVida() {
     setState(() {
       if (widget.calculoVida != 0) {
-        (widget.calculoVida > 0)
-            ? widget.histVida.add('+${widget.calculoVida}')
-            : widget.histVida.add('${widget.calculoVida}');
+        widget.histVida.add(widget.textCalculoVida);
       }
+
       widget.calculoVida = 0;
+      widget.textCalculoVida = '';
     });
   }
 
@@ -75,7 +79,7 @@ class PlayerLifeContainerState extends State<PlayerLifeContainer> {
               bgColor: widget.bgColor,
               vida: widget.vida,
               alterarVida: alterarVida,
-              calculoVida: widget.calculoVida.toString(),
+              calculoVida: widget.textCalculoVida,
             )
           ],
         ),
