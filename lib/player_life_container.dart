@@ -29,7 +29,7 @@ class PlayerLifeContainerState extends State<PlayerLifeContainer> {
     setState(() {
       widget.vida = widget.vidaInicial;
       widget.histVida.clear();
-      widget.calculoVida = 0;
+      widget.textCalculoVida = '';
     });
   }
 
