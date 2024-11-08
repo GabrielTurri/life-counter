@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:life_counter/life_history.dart';
-import './player_life.dart';
+import 'package:life_counter/player_life/life_history.dart';
+import 'player_life.dart';
 
 class PlayerLifeContainer extends StatefulWidget {
   final Color? lifeColor;

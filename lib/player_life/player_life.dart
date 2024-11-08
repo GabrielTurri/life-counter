@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './life_button.dart';
+import 'life_button.dart';
 
 class PlayerLife extends StatefulWidget {
   final Color? lifeColor;
