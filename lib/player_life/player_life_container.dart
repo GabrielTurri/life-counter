@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:life_counter/player_life/life_history.dart';
 import 'player_life.dart';
+import 'package:life_counter/life_controller.dart';
 
 class PlayerLifeContainer extends StatefulWidget {
   final Color? lifeColor;
@@ -65,25 +66,28 @@ class PlayerLifeContainerState extends State<PlayerLifeContainer> {
     return Container(
       decoration: BoxDecoration(color: widget.bgColor),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            PlayerLifeHistory(
-              bgColor: widget.bgColor,
-              lifeColor: widget.lifeColor,
-              histVida: widget.histVida,
-            ),
-            PlayerLife(
-              lifeColor: widget.lifeColor,
-              bgColor: widget.bgColor,
-              vida: widget.vida,
-              alterarVida: alterarVida,
-              calculoVida: widget.textCalculoVida,
-            )
-          ],
-        ),
-      ),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: AnimatedBuilder(
+              animation: PlayerLifeController.instance,
+              builder: (context, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    PlayerLifeHistory(
+                      bgColor: widget.bgColor,
+                      lifeColor: widget.lifeColor,
+                      histVida: widget.histVida,
+                    ),
+                    PlayerLife(
+                      lifeColor: widget.lifeColor,
+                      bgColor: widget.bgColor,
+                      vida: widget.vida,
+                      alterarVida: alterarVida,
+                      calculoVida: widget.textCalculoVida,
+                    )
+                  ],
+                );
+              })),
     );
   }
 }

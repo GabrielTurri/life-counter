@@ -2,26 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:life_counter/app_controller.dart';
 import 'package:life_counter/player_life/player_life_container.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: AppController.instance,
-      builder: (context, child) {
-        return MaterialApp(
-          title: 'Life Counter',
-          theme: ThemeData(
-            useMaterial3: true,
-          ),
-          home: const MyHomePage(),
-        );
-      },
-    );
-  }
-}
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -48,6 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             onPressed: AppController.instance.changeRotation,
             icon: const Icon(Icons.swap_vert),
+            style:
+                ButtonStyle(iconColor: WidgetStateProperty.all(Colors.white)),
           )
         ],
       ),

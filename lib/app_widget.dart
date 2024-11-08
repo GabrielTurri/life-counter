@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:life_counter/app_controller.dart';
 import 'package:life_counter/home_page.dart';
 
 void main() {
@@ -11,17 +10,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: AppController.instance,
-      builder: (context, child) {
-        return MaterialApp(
-          title: 'Life Counter',
-          theme: ThemeData(
-            useMaterial3: true,
-          ),
-          home: const MyHomePage(),
-        );
-      },
+    return MaterialApp(
+      title: 'Life Counter',
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(),
     );
   }
 }
