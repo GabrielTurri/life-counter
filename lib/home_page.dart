@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:life_counter/app_controller.dart';
-import 'package:life_counter/player_life/player_life_container.dart';
+import 'package:life_counter/controllers/app_controller.dart';
+import 'package:life_counter/controllers/life_controller.dart';
+import 'package:life_counter/ui/player_life_container.dart';
+import 'package:provider/provider.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final GlobalKey<PlayerLifeContainerState> player1Key =
-      GlobalKey<PlayerLifeContainerState>();
-  final GlobalKey<PlayerLifeContainerState> player2Key =
-      GlobalKey<PlayerLifeContainerState>();
+class MyHomePage2 extends StatelessWidget {
+  MyHomePage2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: AppController.instance.changeRotation,
+            onPressed: context.read<AppController>().changeRotation,
             icon: const Icon(Icons.swap_vert),
             style:
                 ButtonStyle(iconColor: WidgetStateProperty.all(Colors.white)),
@@ -36,23 +28,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Expanded(
-            child: AnimatedBuilder(
-                animation: AppController.instance,
-                builder: (context, child) {
-                  return RotatedBox(
-                    quarterTurns: AppController.instance.rotacao,
-                    child: PlayerLifeContainer(
-                      key: player1Key,
-                      lifeColor: Colors.green[300],
-                      bgColor: Colors.green[400],
-                      vidaInicial: 20,
-                    ),
-                  );
-                }),
+            child: RotatedBox(
+              quarterTurns: context.watch<AppController>().rotacao,
+              child: PlayerLifeContainer(
+                lifeColor: Colors.green[300],
+                bgColor: Colors.green[400],
+                vidaInicial: 20,
+              ),
+            ),
           ),
           Expanded(
             child: PlayerLifeContainer(
-              key: player2Key,
               lifeColor: Colors.purple[300],
               bgColor: Colors.purple[400],
               vidaInicial: 20,
@@ -98,8 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(color: Colors.red[600]),
               ),
               onPressed: () {
-                player1Key.currentState?.resetarVida();
-                player2Key.currentState?.resetarVida();
+                context.read<PlayerLifeController>().resetarVida(20);
                 Navigator.of(context).pop();
               },
             ),

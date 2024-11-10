@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:life_counter/controllers/life_controller.dart';
+import 'package:life_counter/ui/player_life.dart';
+import 'package:provider/provider.dart';
 
 class PlayerLifeHistory extends StatefulWidget {
   final Color? lifeColor;
   final Color? bgColor;
-  List histVida;
 
-  PlayerLifeHistory({
+  const PlayerLifeHistory({
     super.key,
     required this.lifeColor,
     required this.bgColor,
-    required this.histVida,
   });
 
   @override
@@ -28,13 +29,14 @@ class PlayerLifeHistoryState extends State<PlayerLifeHistory> {
             color: widget.lifeColor, borderRadius: BorderRadius.circular(8)),
         child: ListView.builder(
             reverse: true,
-            itemCount: widget.histVida.length,
+            itemCount: context.watch<PlayerLifeController>().histVida.length,
             itemBuilder: (context, index) {
               return ListTile(
                 minTileHeight: 4,
                 title: Text(
                   textAlign: TextAlign.end,
-                  widget.histVida[index],
+                  // widget.histVida[index],
+                  context.watch<PlayerLifeController>().histVida[index],
                   style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w500),
                 ),
