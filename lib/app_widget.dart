@@ -16,7 +16,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => PlayerLifeController(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MultiPlayerLifeController(2),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: MyHomePage2(),
+        home: MyHomePage(),
       ),
     );
   }

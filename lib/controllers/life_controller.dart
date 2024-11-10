@@ -2,13 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class PlayerLifeController extends ChangeNotifier {
-  final int vidaInicial = 20;
+  int vidaInicial = 20;
   int vida = 20;
   var histVida = [];
   int calculoVida = 0;
   String textCalculoVida = '';
 
-  resetarVida(vidaInicial) {
+  resetarVida() {
     vida = vidaInicial;
     histVida.clear();
     textCalculoVida = '';
@@ -17,12 +17,11 @@ class PlayerLifeController extends ChangeNotifier {
 
   final _timer = TimerVida(milliseconds: 1000);
 
-  void alterarVida(int valor) {
+  alterarVida(int valor) {
     vida += valor;
     calculoVida += valor;
     textCalculoVida =
         (calculoVida > 0) ? '+$calculoVida' : calculoVida.toString();
-
     notifyListeners();
 
     _timer.run(() {
@@ -37,6 +36,46 @@ class PlayerLifeController extends ChangeNotifier {
 
     calculoVida = 0;
     textCalculoVida = '';
+    notifyListeners();
+  }
+
+  void atualizarVidaInicial(novaVidaInicial) {
+    if (novaVidaInicial > 0) {
+      vidaInicial = novaVidaInicial;
+    }
+    notifyListeners();
+  }
+}
+
+class MultiPlayerLifeController extends ChangeNotifier {
+  List<PlayerLifeController> players = [];
+
+  MultiPlayerLifeController(int numPlayers) {
+    for (int i = 0; i < numPlayers; i++) {
+      final player = PlayerLifeController();
+      player.addListener(notifyListeners);
+      players.add(player);
+    }
+  }
+
+  alterarVida(int playerIndex, int valor) {
+    if (playerIndex < players.length) {
+      players[playerIndex].alterarVida(valor);
+    }
+    notifyListeners();
+  }
+
+  void resetarVida() {
+    for (var i = 0; i < players.length; i++) {
+      players[i].resetarVida();
+    }
+    notifyListeners();
+  }
+
+  void atualizarVidaInicial(int novaVidaInicial) {
+    for (var i = 0; i < players.length; i++) {
+      players[i].atualizarVidaInicial(novaVidaInicial);
+    }
     notifyListeners();
   }
 }

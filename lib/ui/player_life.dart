@@ -6,11 +6,13 @@ import 'life_button.dart';
 class PlayerLife extends StatelessWidget {
   final Color? lifeColor;
   final Color? bgColor;
+  final int playerIndex;
 
   PlayerLife({
     super.key,
     required this.lifeColor,
     required this.bgColor,
+    required this.playerIndex,
   });
 
   @override
@@ -23,22 +25,18 @@ class PlayerLife extends StatelessWidget {
           children: [
             LifeButton(
                 texto: '-1',
-                onPressed: () {
-                  // widget.alterarVida(-1);
-                  context.read<PlayerLifeController>().alterarVida(-1);
-                },
+                vida: -1,
+                playerIndex: playerIndex,
                 color: bgColor),
             LifeButton(
                 texto: '-2',
-                onPressed: () {
-                  context.read<PlayerLifeController>().alterarVida(-2);
-                },
+                vida: -2,
+                playerIndex: playerIndex,
                 color: bgColor),
             LifeButton(
                 texto: '-3',
-                onPressed: () {
-                  context.read<PlayerLifeController>().alterarVida(-3);
-                },
+                vida: -3,
+                playerIndex: playerIndex,
                 color: bgColor),
           ],
         ),
@@ -46,7 +44,10 @@ class PlayerLife extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              context.watch<PlayerLifeController>().textCalculoVida,
+              context
+                  .watch<MultiPlayerLifeController>()
+                  .players[playerIndex]
+                  .textCalculoVida,
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -64,8 +65,11 @@ class PlayerLife extends StatelessWidget {
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
                       fontSize: 24),
-                  // widget.vida.toString(),
-                  context.watch<PlayerLifeController>().vida.toString(),
+                  context
+                      .watch<MultiPlayerLifeController>()
+                      .players[playerIndex]
+                      .vida
+                      .toString(),
                 ),
               ),
             ),
@@ -76,23 +80,11 @@ class PlayerLife extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             LifeButton(
-                texto: '+1',
-                onPressed: () {
-                  context.read<PlayerLifeController>().alterarVida(1);
-                },
-                color: bgColor),
+                texto: '+1', vida: 1, playerIndex: playerIndex, color: bgColor),
             LifeButton(
-                texto: '+2',
-                onPressed: () {
-                  context.read<PlayerLifeController>().alterarVida(2);
-                },
-                color: bgColor),
+                texto: '+2', vida: 2, playerIndex: playerIndex, color: bgColor),
             LifeButton(
-                texto: '+3',
-                onPressed: () {
-                  context.read<PlayerLifeController>().alterarVida(3);
-                },
-                color: bgColor),
+                texto: '+3', vida: 3, playerIndex: playerIndex, color: bgColor),
           ],
         ),
       ],
