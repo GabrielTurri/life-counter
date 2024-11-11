@@ -7,7 +7,7 @@ class SettingsModal {
   SettingsModal({required this.openModal});
 
   static void dialogBuilder(BuildContext context) {
-    final vidaInicialController = TextEditingController();
+    final vidaInicialController = TextEditingController(text: '20');
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -22,12 +22,13 @@ class SettingsModal {
                 children: [
                   SizedBox(
                     width: 250,
-                    child: TextField(
+                    child: TextFormField(
                       maxLength: 3,
                       keyboardType: TextInputType.number,
                       controller: vidaInicialController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8)),
                         labelText: 'Vida inicial',
                       ),
                     ),

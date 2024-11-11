@@ -24,7 +24,6 @@ class PlayerLifeHistory extends StatelessWidget {
         decoration: BoxDecoration(
             color: lifeColor, borderRadius: BorderRadius.circular(8)),
         child: ListView.builder(
-            reverse: true,
             itemCount: context
                 .watch<MultiPlayerLifeController>()
                 .players[playerIndex]
