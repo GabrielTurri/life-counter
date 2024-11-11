@@ -44,20 +44,16 @@ class MyHomePage extends StatelessWidget {
               quarterTurns: context.watch<AppController>().rotacao,
               child: PlayerLifeContainer(
                 playerIndex: 0,
-                playerController: playerController,
                 lifeColor: Colors.green[300],
                 bgColor: Colors.green[400],
-                vidaInicial: 20,
               ),
             ),
           ),
           Expanded(
             child: PlayerLifeContainer(
               playerIndex: 1,
-              playerController: playerController,
               lifeColor: Colors.purple[300],
               bgColor: Colors.purple[400],
-              vidaInicial: 20,
             ),
           ),
         ],

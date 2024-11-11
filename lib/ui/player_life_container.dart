@@ -6,17 +6,13 @@ import 'player_life.dart';
 class PlayerLifeContainer extends StatelessWidget {
   final Color? lifeColor;
   final Color? bgColor;
-  final int vidaInicial;
   final int playerIndex;
-  final MultiPlayerLifeController playerController;
 
   PlayerLifeContainer({
     super.key,
     required this.lifeColor,
     required this.bgColor,
-    required this.vidaInicial,
     required this.playerIndex,
-    required this.playerController,
   });
 
   @override
