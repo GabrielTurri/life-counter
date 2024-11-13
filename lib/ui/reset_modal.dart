@@ -3,9 +3,6 @@ import 'package:life_counter/controllers/life_controller.dart';
 import 'package:provider/provider.dart';
 
 class ResetModal {
-  Function funcao;
-
-  ResetModal({required this.funcao});
 
   static void dialogBuilder(BuildContext context) {
     showDialog(
