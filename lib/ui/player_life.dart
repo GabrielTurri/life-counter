@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:life_counter/controllers/life_controller.dart';
 import 'package:provider/provider.dart';
-import 'life_button.dart';
+import 'life_counter/widgets/life_button.dart';
 
 class PlayerLife extends StatelessWidget {
   final Color? lifeColor;

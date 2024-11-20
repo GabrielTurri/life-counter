@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:life_counter/controllers/life_controller.dart';
-import 'package:life_counter/ui/life_history.dart';
-import 'player_life.dart';
+import 'package:life_counter/ui/life_counter/widgets/life_history.dart';
+import '../../player_life.dart';
 
 class PlayerLifeContainer extends StatelessWidget {
   final Color? lifeColor;

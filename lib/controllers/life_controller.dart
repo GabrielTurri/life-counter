@@ -48,6 +48,7 @@ class PlayerLifeController extends ChangeNotifier {
 }
 
 class MultiPlayerLifeController extends ChangeNotifier {
+  int numJogadores = 2;
   List<PlayerLifeController> players = [];
 
   MultiPlayerLifeController(int numPlayers) {

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:life_counter/controllers/app_controller.dart';
 import 'package:life_counter/controllers/life_controller.dart';
-import 'package:life_counter/ui/player_life_container.dart';
-import 'package:life_counter/ui/reset_modal.dart';
-import 'package:life_counter/ui/settings_modal.dart';
+import 'package:life_counter/ui/life_counter/widgets/player_life_container.dart';
+import 'package:life_counter/ui/modal/reset_modal.dart';
+import 'package:life_counter/ui/modal/settings_modal.dart';
 import 'package:provider/provider.dart';
 
-class MyHomePage extends StatelessWidget {
+class LifeCounterPage extends StatelessWidget {
   final MultiPlayerLifeController playerController =
       MultiPlayerLifeController(2);
-  MyHomePage({super.key});
+  LifeCounterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
