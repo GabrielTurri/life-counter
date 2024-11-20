@@ -14,10 +14,14 @@ class PlayerNumberSelector extends StatelessWidget {
         ),
         FilledButton(
           onPressed: () {},
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.grey)),
           child: const Text('3'),
         ),
         FilledButton(
           onPressed: () {},
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.grey)),
           child: const Text('4'),
         ),
       ],

@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Text('Entrar')),
+                child: const Text('Iniciar')),
           ],
         )));
   }
