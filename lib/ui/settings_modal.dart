@@ -3,9 +3,6 @@ import 'package:life_counter/controllers/life_controller.dart';
 import 'package:provider/provider.dart';
 
 class SettingsModal {
-  Function openModal;
-  SettingsModal({required this.openModal});
-
   static void dialogBuilder(BuildContext context) {
     final vidaInicialController = TextEditingController(text: '20');
     showDialog(
