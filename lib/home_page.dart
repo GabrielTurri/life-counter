@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:life_counter/controllers/app_controller.dart';
 import 'package:life_counter/controllers/life_controller.dart';
 import 'package:life_counter/ui/player_life_container.dart';
-import 'package:life_counter/ui/reset_modal.dart';
-import 'package:life_counter/ui/settings_modal.dart';
+import 'package:life_counter/ui/modal/reset_modal.dart';
+import 'package:life_counter/ui/modal/settings_modal.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   final MultiPlayerLifeController playerController =
       MultiPlayerLifeController(2);
+  final MultiPlayerAppController playerAppController =
+      MultiPlayerAppController(2);
   MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final playerApp = context.watch<MultiPlayerAppController>();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -22,7 +26,15 @@ class MyHomePage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: context.read<AppController>().changeRotation,
+            onPressed: () {
+              context.read<MultiPlayerAppController>().changeRotationUpsideDown(
+                    numJogadores: Provider.of<MultiPlayerLifeController>(
+                            context,
+                            listen: false)
+                        .numJogadores,
+                    playerIndex: 0,
+                  );
+            },
             icon: const Icon(Icons.swap_vert),
             style:
                 ButtonStyle(iconColor: WidgetStateProperty.all(Colors.white)),
@@ -38,29 +50,21 @@ class MyHomePage extends StatelessWidget {
         ],
       ),
       body: Column(
-        children: [
-          Expanded(
+        children: List.generate(
+            context.watch<MultiPlayerLifeController>().numJogadores, (index) {
+          return Expanded(
             child: RotatedBox(
-              quarterTurns: context.watch<AppController>().rotacao,
+              quarterTurns: playerApp.players[index].rotacao,
               child: PlayerLifeContainer(
-                playerIndex: 0,
+                playerIndex: index,
                 playerController: playerController,
-                lifeColor: Colors.green[300],
-                bgColor: Colors.green[400],
+                lifeColor: playerApp.players[index].lifeColor,
+                bgColor: playerApp.players[index].bgColor,
                 vidaInicial: 20,
               ),
             ),
-          ),
-          Expanded(
-            child: PlayerLifeContainer(
-              playerIndex: 1,
-              playerController: playerController,
-              lifeColor: Colors.purple[300],
-              bgColor: Colors.purple[400],
-              vidaInicial: 20,
-            ),
-          ),
-        ],
+          );
+        }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
           create: (context) => PlayerLifeController(),
         ),
         ChangeNotifierProvider(
+          create: (context) => MultiPlayerAppController(2),
+        ),
+        ChangeNotifierProvider(
           create: (context) => MultiPlayerLifeController(2),
         ),
       ],

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class PlayerLifeController extends ChangeNotifier {
   int vidaInicial = 20;
   int vida = 20;
-  var histVida = [];
+  List histVida = [];
   int calculoVida = 0;
   String textCalculoVida = '';
 
@@ -48,10 +48,11 @@ class PlayerLifeController extends ChangeNotifier {
 }
 
 class MultiPlayerLifeController extends ChangeNotifier {
+  int numJogadores = 2;
   List<PlayerLifeController> players = [];
 
-  MultiPlayerLifeController(int numPlayers) {
-    for (int i = 0; i < numPlayers; i++) {
+  MultiPlayerLifeController(int numJogadores) {
+    for (int i = 0; i < numJogadores; i++) {
       final player = PlayerLifeController();
       player.addListener(notifyListeners);
       players.add(player);
