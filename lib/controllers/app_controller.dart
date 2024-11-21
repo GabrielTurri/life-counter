@@ -6,6 +6,7 @@ class AppController extends ChangeNotifier {
 
   Color? lifeColor = Colors.green[300];
   Color? bgColor = Colors.green[400];
+  int colorScheme = 1;
 
   changeRotationUpsideDown(numJogadores, playerIndex) async {
     if (playerIndex == 0 && numJogadores == 2) {
@@ -14,14 +15,20 @@ class AppController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  changeColor() {
+    colorScheme++;
+    if (colorScheme == 6) {
+      colorScheme = 1;
+    }
+    ColorScheme.appColors[colorScheme]?[0];
+    ColorScheme.appColors[colorScheme]?[1];
+    debugPrint(colorScheme.toString());
+    notifyListeners();
+  }
 }
 
 class MultiPlayerAppController extends ChangeNotifier {
-  Map<String, List<Color?>> appColors = {
-    'green': [Colors.green[300], Colors.green[400]],
-    'purple': [Colors.purple[300], Colors.purple[400]],
-    'cyan': [Colors.cyan[300], Colors.cyan[400]],
-  };
   List<AppController> players = [];
 
   MultiPlayerAppController(int numJogadores) {
@@ -29,12 +36,14 @@ class MultiPlayerAppController extends ChangeNotifier {
       final player = AppController();
       switch (i) {
         case 0:
-          player.lifeColor = appColors['green']?[0];
-          player.bgColor = appColors['green']?[1];
+          player.lifeColor = ColorScheme.appColors[1]?[0];
+          player.bgColor = ColorScheme.appColors[1]?[1];
+          player.colorScheme = 1;
           break;
         case 1:
-          player.lifeColor = appColors['purple']?[0];
-          player.bgColor = appColors['purple']?[1];
+          player.lifeColor = ColorScheme.appColors[2]?[0];
+          player.bgColor = ColorScheme.appColors[2]?[1];
+          player.colorScheme = 2;
           break;
       }
       player.addListener(notifyListeners);
@@ -47,4 +56,21 @@ class MultiPlayerAppController extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  changeColor(playerIndex) {
+    if (playerIndex < players.length) {
+      players[playerIndex].changeColor();
+    }
+    notifyListeners();
+  }
+}
+
+class ColorScheme {
+  static Map<int, List<Color?>> appColors = {
+    1: [Colors.green[300], Colors.green[400]],
+    2: [Colors.purple[300], Colors.purple[400]],
+    3: [Colors.cyan[300], Colors.cyan[400]],
+    4: [Colors.red[300], Colors.red[400]],
+    5: [Colors.orange[300], Colors.orange[400]],
+  };
 }

@@ -7,19 +7,17 @@ import 'package:life_counter/ui/modal/settings_modal.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
-  final MultiPlayerLifeController playerController =
-      MultiPlayerLifeController(2);
-  final MultiPlayerAppController playerAppController =
-      MultiPlayerAppController(2);
   MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final playerApp = context.watch<MultiPlayerAppController>();
+    final MultiPlayerLifeController playerController =
+        MultiPlayerLifeController(2);
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.grey[850],
         title: const Text(
           'Life Counter',
           style: TextStyle(color: Colors.white),
@@ -58,8 +56,6 @@ class MyHomePage extends StatelessWidget {
               child: PlayerLifeContainer(
                 playerIndex: index,
                 playerController: playerController,
-                lifeColor: playerApp.players[index].lifeColor,
-                bgColor: playerApp.players[index].bgColor,
                 vidaInicial: 20,
               ),
             ),
