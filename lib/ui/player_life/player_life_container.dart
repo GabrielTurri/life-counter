@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:life_counter/controllers/app_controller.dart';
 import 'package:life_counter/controllers/life_controller.dart';
-import 'package:life_counter/ui/life_history.dart';
+import 'package:life_counter/ui/player_life/life_history.dart';
 import 'package:provider/provider.dart';
 import 'player_life.dart';
 
