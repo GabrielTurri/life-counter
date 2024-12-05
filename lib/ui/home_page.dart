@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:life_counter/controllers/app_controller.dart';
 import 'package:life_counter/controllers/life_controller.dart';
-import 'package:life_counter/ui/player_life_container.dart';
+import 'package:life_counter/ui/player_life/player_life_container.dart';
 import 'package:life_counter/ui/modal/reset_modal.dart';
 import 'package:life_counter/ui/modal/settings_modal.dart';
 import 'package:provider/provider.dart';
