@@ -25,13 +25,16 @@ class MyHomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context.read<MultiPlayerAppController>().changeRotationUpsideDown(
-                    numJogadores: Provider.of<MultiPlayerLifeController>(
-                            context,
-                            listen: false)
-                        .numJogadores,
-                    playerIndex: 0,
-                  );
+              final multiplayerController =
+                  context.read<MultiPlayerAppController>();
+
+              multiplayerController.changeRotationUpsideDown(
+                numJogadores: Provider.of<MultiPlayerLifeController>(
+                  context,
+                  listen: false,
+                ).numJogadores,
+                playerIndex: 0,
+              );
             },
             icon: const Icon(Icons.swap_vert),
             style:
@@ -56,7 +59,7 @@ class MyHomePage extends StatelessWidget {
               child: PlayerLifeContainer(
                 playerIndex: index,
                 playerController: playerController,
-                vidaInicial: 20,
+                initialLife: 20,
               ),
             ),
           );

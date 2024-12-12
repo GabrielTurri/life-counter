@@ -17,13 +17,8 @@ class AppController extends ChangeNotifier {
   }
 
   changeColor() {
-    colorScheme++;
-    if (colorScheme == 6) {
-      colorScheme = 1;
-    }
     ColorScheme.appColors[colorScheme]?[0];
     ColorScheme.appColors[colorScheme]?[1];
-    debugPrint(colorScheme.toString());
     notifyListeners();
   }
 }
