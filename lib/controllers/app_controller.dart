@@ -4,9 +4,9 @@ class AppController extends ChangeNotifier {
   bool isRotated = false;
   int rotacao = 0;
 
-  Color? lifeColor = Colors.green[300];
-  Color? bgColor = Colors.green[400];
-  int colorScheme = 1;
+  late Color? lifeColor;
+  late Color? bgColor;
+  late Color activeColor;
 
   changeRotationUpsideDown(numJogadores, playerIndex) async {
     if (playerIndex == 0 && numJogadores == 2) {
@@ -16,9 +16,10 @@ class AppController extends ChangeNotifier {
     }
   }
 
-  changeColor() {
-    ColorScheme.appColors[colorScheme]?[0];
-    ColorScheme.appColors[colorScheme]?[1];
+  changeColor(color) {
+    lifeColor = ColorScheme.appColors[color]?[0];
+    bgColor = ColorScheme.appColors[color]?[1];
+    activeColor = color;
     notifyListeners();
   }
 }
@@ -31,14 +32,16 @@ class MultiPlayerAppController extends ChangeNotifier {
       final player = AppController();
       switch (i) {
         case 0:
-          player.lifeColor = ColorScheme.appColors[1]?[0];
-          player.bgColor = ColorScheme.appColors[1]?[1];
-          player.colorScheme = 1;
+          player.changeColor(Colors.green);
           break;
         case 1:
-          player.lifeColor = ColorScheme.appColors[2]?[0];
-          player.bgColor = ColorScheme.appColors[2]?[1];
-          player.colorScheme = 2;
+          player.changeColor(Colors.purple);
+          break;
+        case 3:
+          player.changeColor(Colors.orange);
+          break;
+        case 4:
+          player.changeColor(Colors.red);
           break;
       }
       player.addListener(notifyListeners);
@@ -52,20 +55,23 @@ class MultiPlayerAppController extends ChangeNotifier {
     notifyListeners();
   }
 
-  changeColor(playerIndex) {
+  changeColor(playerIndex, color) {
     if (playerIndex < players.length) {
-      players[playerIndex].changeColor();
+      players[playerIndex].changeColor(color);
     }
     notifyListeners();
   }
 }
 
 class ColorScheme {
-  static Map<int, List<Color?>> appColors = {
-    1: [Colors.green[300], Colors.green[400]],
-    2: [Colors.purple[300], Colors.purple[400]],
-    3: [Colors.cyan[300], Colors.cyan[400]],
-    4: [Colors.red[300], Colors.red[400]],
-    5: [Colors.orange[300], Colors.orange[400]],
+  static Map<Color, List<Color?>> appColors = {
+    Colors.green: [Colors.green[300], Colors.green[400]],
+    Colors.greenAccent: [Colors.greenAccent[200], Colors.greenAccent[400]],
+    Colors.cyan: [Colors.cyan[200], Colors.cyan[400]],
+    Colors.purple: [Colors.purple[300], Colors.purple[400]],
+    Colors.red: [Colors.red[300], Colors.red[600]],
+    Colors.pink: [Colors.pink[300], Colors.pink[600]],
+    Colors.orange: [Colors.orange[200], Colors.orange[400]],
+    Colors.blueGrey: [Colors.blueGrey[700], Colors.blueGrey[800]],
   };
 }

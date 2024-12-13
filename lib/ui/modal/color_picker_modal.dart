@@ -1,30 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:life_counter/controllers/life_controller.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:life_counter/controllers/app_controller.dart';
 import 'package:provider/provider.dart';
 
 class ColorPickerModal {
-  Color color = Colors.green;
-
-  Widget buildColorPicker() => ColorPicker(
-        pickerColor: playerApp.bgColor,
-        onColorChanged: (color) => this.color = color,
-      );
-
-  void dialogBuilder(BuildContext context) {
+  static void dialogBuilder(BuildContext context, playerIndex) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Selecionar cor do Jogador'),
         content: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            buildColorPicker(),
+            buildColorPicker(playerIndex),
             TextButton(
-              child: const Text('Selecionar'),
+              child: const Text('Fechar'),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class buildColorPicker extends StatelessWidget {
+  int playerIndex;
+
+  buildColorPicker(this.playerIndex);
+
+  @override
+  Widget build(BuildContext context) {
+    final playerApp = context.watch<MultiPlayerAppController>();
+
+    return BlockPicker(
+      pickerColor: playerApp.players[playerIndex].activeColor,
+      onColorChanged: (color) => playerApp.changeColor(playerIndex, color),
+      availableColors: [
+        Colors.green,
+        Colors.greenAccent,
+        Colors.cyan,
+        Colors.purple,
+        Colors.red,
+        Colors.orange,
+        Colors.pink,
+        Colors.blueGrey
+      ],
     );
   }
 }

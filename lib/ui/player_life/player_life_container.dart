@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:life_counter/controllers/app_controller.dart';
-import 'package:life_counter/controllers/life_controller.dart';
 import 'package:life_counter/ui/modal/color_picker_modal.dart';
 import 'package:life_counter/ui/player_life/life_history.dart';
 import 'package:provider/provider.dart';
@@ -10,13 +8,11 @@ import 'player_life.dart';
 class PlayerLifeContainer extends StatelessWidget {
   final int initialLife;
   final int playerIndex;
-  final MultiPlayerLifeController playerController;
 
   PlayerLifeContainer({
     super.key,
     required this.initialLife,
     required this.playerIndex,
-    required this.playerController,
   });
 
   @override
@@ -30,13 +26,8 @@ class PlayerLifeContainer extends StatelessWidget {
             top: 15,
             right: 15,
             child: IconButton(
-                // onPressed: () {
-                //   context
-                //       .read<MultiPlayerAppController>()
-                //       .changeColor(playerIndex);
-                // },
                 onPressed: () {
-                  ColorPickerModal.dialogBuilder(context);
+                  ColorPickerModal.dialogBuilder(context, playerIndex);
                 },
                 icon: const Icon(
                   Icons.color_lens,

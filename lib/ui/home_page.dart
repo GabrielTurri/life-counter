@@ -12,8 +12,6 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final playerApp = context.watch<MultiPlayerAppController>();
-    final MultiPlayerLifeController playerController =
-        MultiPlayerLifeController(2);
 
     return Scaffold(
       appBar: AppBar(
@@ -58,7 +56,6 @@ class MyHomePage extends StatelessWidget {
               quarterTurns: playerApp.players[index].rotacao,
               child: PlayerLifeContainer(
                 playerIndex: index,
-                playerController: playerController,
                 initialLife: 20,
               ),
             ),
