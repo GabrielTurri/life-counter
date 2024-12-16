@@ -17,8 +17,8 @@ class AppController extends ChangeNotifier {
   }
 
   changeColor(color) {
-    lifeColor = ColorScheme.appColors[color]?[0];
-    bgColor = ColorScheme.appColors[color]?[1];
+    lifeColor = ColorPalette.appColors[color]?[0];
+    bgColor = ColorPalette.appColors[color]?[1];
     activeColor = color;
     notifyListeners();
   }
@@ -63,14 +63,14 @@ class MultiPlayerAppController extends ChangeNotifier {
   }
 }
 
-class ColorScheme {
+class ColorPalette {
   static Map<Color, List<Color?>> appColors = {
     Colors.green: [Colors.green[300], Colors.green[400]],
     Colors.greenAccent: [Colors.greenAccent[200], Colors.greenAccent[400]],
     Colors.cyan: [Colors.cyan[200], Colors.cyan[400]],
     Colors.purple: [Colors.purple[300], Colors.purple[400]],
-    Colors.red: [Colors.red[300], Colors.red[600]],
     Colors.pink: [Colors.pink[300], Colors.pink[600]],
+    Colors.red: [Colors.red[300], Colors.red[600]],
     Colors.orange: [Colors.orange[200], Colors.orange[400]],
     Colors.blueGrey: [Colors.blueGrey[700], Colors.blueGrey[800]],
   };

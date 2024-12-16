@@ -37,14 +37,7 @@ class buildColorPicker extends StatelessWidget {
       pickerColor: playerApp.players[playerIndex].activeColor,
       onColorChanged: (color) => playerApp.changeColor(playerIndex, color),
       availableColors: [
-        Colors.green,
-        Colors.greenAccent,
-        Colors.cyan,
-        Colors.purple,
-        Colors.red,
-        Colors.orange,
-        Colors.pink,
-        Colors.blueGrey
+        ...ColorPalette.appColors.keys,
       ],
     );
   }
