@@ -11,7 +11,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final playerApp = context.watch<MultiPlayerAppController>();
+    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Scaffold(
       appBar: AppBar(
@@ -48,20 +48,9 @@ class MyHomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: List.generate(
-            context.watch<MultiPlayerLifeController>().numJogadores, (index) {
-          return Expanded(
-            child: RotatedBox(
-              quarterTurns: playerApp.players[index].rotacao,
-              child: PlayerLifeContainer(
-                playerIndex: index,
-                initialLife: 20,
-              ),
-            ),
-          );
-        }),
-      ),
+      body: LayoutBuilder(builder: (context, orientation) {
+        return (isPortrait) ? const PlayerColumn() : const PlayerRow();
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           ResetModal.dialogBuilder(context);
@@ -69,6 +58,54 @@ class MyHomePage extends StatelessWidget {
         tooltip: 'Reset',
         child: const Icon(Icons.restart_alt_outlined),
       ),
+    );
+  }
+}
+
+class PlayerColumn extends StatelessWidget {
+  const PlayerColumn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final playerApp = context.watch<MultiPlayerAppController>();
+
+    return Column(
+      children: List.generate(
+          context.watch<MultiPlayerLifeController>().numJogadores, (index) {
+        return Expanded(
+          child: RotatedBox(
+            quarterTurns: playerApp.players[index].rotacao,
+            child: PlayerLifeContainer(
+              playerIndex: index,
+              initialLife: 20,
+            ),
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class PlayerRow extends StatelessWidget {
+  const PlayerRow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final playerApp = context.watch<MultiPlayerAppController>();
+
+    return Row(
+      children: List.generate(
+          context.watch<MultiPlayerLifeController>().numJogadores, (index) {
+        return Expanded(
+          child: RotatedBox(
+            quarterTurns: playerApp.players[index].rotacao,
+            child: PlayerLifeContainer(
+              playerIndex: index,
+              initialLife: 20,
+            ),
+          ),
+        );
+      }),
     );
   }
 }
