@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_counter/controllers/app_controller.dart';
 import 'package:life_counter/controllers/life_controller.dart';
 import 'package:provider/provider.dart';
 import 'life_button.dart';
@@ -17,44 +18,43 @@ class PlayerLife extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final playerLife =
+        context.watch<MultiPlayerLifeController>().players[playerIndex];
+
+    final buttonCount = context.watch<AppController>().buttonCount;
+
     return Row(
       children: [
         Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            LifeButton(
-                texto: '-1',
-                vida: -1,
+          children: List.generate(
+            buttonCount,
+            (index) {
+              int x = index + 1;
+              int value = x - (x * 2);
+
+              return LifeButton(
+                texto: value.toString(),
+                vida: value,
                 playerIndex: playerIndex,
-                color: bgColor),
-            LifeButton(
-                texto: '-2',
-                vida: -2,
-                playerIndex: playerIndex,
-                color: bgColor),
-            LifeButton(
-                texto: '-3',
-                vida: -3,
-                playerIndex: playerIndex,
-                color: bgColor),
-          ],
+                color: bgColor,
+              );
+            },
+          ),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              context
-                  .watch<MultiPlayerLifeController>()
-                  .players[playerIndex]
-                  .textCalculoVida,
+              playerLife.textCalculoVida,
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w600),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
+              margin: const EdgeInsets.fromLTRB(8, 0, 8, 28),
               width: 72,
               height: 72,
               decoration: BoxDecoration(
@@ -65,28 +65,28 @@ class PlayerLife extends StatelessWidget {
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
                       fontSize: 24),
-                  context
-                      .watch<MultiPlayerLifeController>()
-                      .players[playerIndex]
-                      .vida
-                      .toString(),
+                  playerLife.vida.toString(),
                 ),
               ),
             ),
           ],
         ),
         Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            LifeButton(
-                texto: '+1', vida: 1, playerIndex: playerIndex, color: bgColor),
-            LifeButton(
-                texto: '+2', vida: 2, playerIndex: playerIndex, color: bgColor),
-            LifeButton(
-                texto: '+3', vida: 3, playerIndex: playerIndex, color: bgColor),
-          ],
-        ),
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              buttonCount,
+              (index) {
+                int value = index + 1;
+
+                return LifeButton(
+                  texto: '+$value',
+                  vida: value,
+                  playerIndex: playerIndex,
+                  color: bgColor,
+                );
+              },
+            )),
       ],
     );
   }

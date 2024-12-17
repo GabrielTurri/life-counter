@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 class AppController extends ChangeNotifier {
   bool isRotated = false;
   int rotacao = 0;
+  int _buttonCount = 3;
+
+  int get buttonCount => _buttonCount;
 
   late Color? lifeColor;
   late Color? bgColor;
@@ -21,6 +24,13 @@ class AppController extends ChangeNotifier {
     bgColor = ColorPalette.appColors[color]?[1];
     activeColor = color;
     notifyListeners();
+  }
+
+  changeButtonCount(value) {
+    if (_buttonCount != value && value > 0 && value < 4) {
+      _buttonCount = value;
+      notifyListeners();
+    }
   }
 }
 
