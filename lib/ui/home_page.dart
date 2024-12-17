@@ -12,6 +12,8 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    int numJogadores = context.watch<MultiPlayerLifeController>().numJogadores;
+    final multiplayerController = context.read<MultiPlayerAppController>();
 
     return Scaffold(
       appBar: AppBar(
@@ -23,14 +25,8 @@ class MyHomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              final multiplayerController =
-                  context.read<MultiPlayerAppController>();
-
               multiplayerController.changeRotationUpsideDown(
-                numJogadores: Provider.of<MultiPlayerLifeController>(
-                  context,
-                  listen: false,
-                ).numJogadores,
+                numJogadores: numJogadores,
                 playerIndex: 0,
               );
             },
@@ -49,7 +45,19 @@ class MyHomePage extends StatelessWidget {
         ],
       ),
       body: LayoutBuilder(builder: (context, orientation) {
-        return (isPortrait) ? const PlayerColumn() : const PlayerRow();
+        if (isPortrait == true) {
+          return Column(
+            children: List.generate(numJogadores, (index) {
+              return PlayerBlock(index: index);
+            }),
+          );
+        } else {
+          return Row(
+            children: List.generate(numJogadores, (index) {
+              return PlayerBlock(index: index);
+            }),
+          );
+        }
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -62,50 +70,23 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class PlayerColumn extends StatelessWidget {
-  const PlayerColumn({super.key});
+class PlayerBlock extends StatelessWidget {
+  int index;
+
+  PlayerBlock({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
     final playerApp = context.watch<MultiPlayerAppController>();
 
-    return Column(
-      children: List.generate(
-          context.watch<MultiPlayerLifeController>().numJogadores, (index) {
-        return Expanded(
-          child: RotatedBox(
-            quarterTurns: playerApp.players[index].rotacao,
-            child: PlayerLifeContainer(
-              playerIndex: index,
-              initialLife: 20,
-            ),
-          ),
-        );
-      }),
-    );
-  }
-}
-
-class PlayerRow extends StatelessWidget {
-  const PlayerRow({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final playerApp = context.watch<MultiPlayerAppController>();
-
-    return Row(
-      children: List.generate(
-          context.watch<MultiPlayerLifeController>().numJogadores, (index) {
-        return Expanded(
-          child: RotatedBox(
-            quarterTurns: playerApp.players[index].rotacao,
-            child: PlayerLifeContainer(
-              playerIndex: index,
-              initialLife: 20,
-            ),
-          ),
-        );
-      }),
+    return Expanded(
+      child: RotatedBox(
+        quarterTurns: playerApp.players[index].rotacao,
+        child: PlayerLifeContainer(
+          playerIndex: index,
+          initialLife: 20,
+        ),
+      ),
     );
   }
 }
