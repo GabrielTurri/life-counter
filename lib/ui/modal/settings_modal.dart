@@ -88,6 +88,7 @@ class ButtonCountRadioButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final appController = context.read<AppController>();
     final appControllerData = context.watch<AppController>();
+    final List<int> radioOptions = [1, 2, 3];
     var selectedOption = appControllerData.buttonCount;
 
     return Column(
@@ -96,30 +97,21 @@ class ButtonCountRadioButton extends StatelessWidget {
           'Alterar quantidade de botões',
           style: TextStyle(fontSize: 16),
         ),
-        RadioListTile(
-          title: const Text('1'),
-          value: 1,
-          groupValue: appControllerData.buttonCount,
-          onChanged: (value) {
-            appController.changeButtonCount(value);
-          },
-        ),
-        RadioListTile(
-          title: const Text('2'),
-          value: 2,
-          groupValue: appControllerData.buttonCount,
-          onChanged: (value) {
-            appController.changeButtonCount(value!);
-          },
-        ),
-        RadioListTile(
-          title: const Text('3'),
-          value: 3,
-          groupValue: appControllerData.buttonCount,
-          onChanged: (value) {
-            appController.changeButtonCount(value!);
-          },
-        ),
+        Column(
+          children: List.generate(
+            radioOptions.length,
+            (index) {
+              return RadioListTile(
+                title: Text(radioOptions[index].toString()),
+                value: radioOptions[index],
+                groupValue: appControllerData.buttonCount,
+                onChanged: (value) {
+                  appController.changeButtonCount(value);
+                },
+              );
+            },
+          ),
+        )
       ],
     );
   }
