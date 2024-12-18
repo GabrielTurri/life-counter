@@ -9,7 +9,6 @@ class SettingsModal {
 
   static void dialogBuilder(BuildContext context) {
     final vidaInicialController = TextEditingController(text: '20');
-    final appController = context.read<AppController>();
 
     showDialog(
       context: context,
@@ -36,6 +35,10 @@ class SettingsModal {
                         labelText: 'Vida inicial',
                       ),
                     ),
+                  ),
+                  const Text(
+                    'Alterar quantidade de botões',
+                    style: TextStyle(fontSize: 16),
                   ),
                   ButtonCountRadioButton()
                 ],
@@ -68,8 +71,6 @@ class SettingsModal {
                       .atualizarVidaInicial(
                           int.parse(vidaInicialController.text));
 
-                  // appController
-                  //     .changeButtonCount(ButtonCountRadioButton.selectedOption);
                   Navigator.of(context).pop();
                 },
               ),
@@ -89,30 +90,21 @@ class ButtonCountRadioButton extends StatelessWidget {
     final appController = context.read<AppController>();
     final appControllerData = context.watch<AppController>();
     final List<int> radioOptions = [1, 2, 3];
-    var selectedOption = appControllerData.buttonCount;
 
     return Column(
-      children: <Widget>[
-        const Text(
-          'Alterar quantidade de botões',
-          style: TextStyle(fontSize: 16),
-        ),
-        Column(
-          children: List.generate(
-            radioOptions.length,
-            (index) {
-              return RadioListTile(
-                title: Text(radioOptions[index].toString()),
-                value: radioOptions[index],
-                groupValue: appControllerData.buttonCount,
-                onChanged: (value) {
-                  appController.changeButtonCount(value);
-                },
-              );
+      children: List.generate(
+        radioOptions.length,
+        (index) {
+          return RadioListTile(
+            title: Text(radioOptions[index].toString()),
+            value: radioOptions[index],
+            groupValue: appControllerData.buttonCount,
+            onChanged: (value) {
+              appController.changeButtonCount(value);
             },
-          ),
-        )
-      ],
+          );
+        },
+      ),
     );
   }
 }
