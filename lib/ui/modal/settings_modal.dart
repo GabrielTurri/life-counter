@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:life_counter/controllers/app_controller.dart';
 import 'package:life_counter/controllers/life_controller.dart';
+import 'package:life_counter/ui/modal/reset_confirmation_modal.dart';
 import 'package:provider/provider.dart';
 
 class SettingsModal {
@@ -9,6 +10,7 @@ class SettingsModal {
 
   static void dialogBuilder(BuildContext context) {
     final vidaInicialController = TextEditingController(text: '20');
+    final multiPlayerLifeController = context.read<MultiPlayerLifeController>();
 
     showDialog(
       context: context,
@@ -66,12 +68,11 @@ class SettingsModal {
                   style: TextStyle(color: Colors.green),
                 ),
                 onPressed: () {
-                  context
-                      .read<MultiPlayerLifeController>()
-                      .atualizarVidaInicial(
-                          int.parse(vidaInicialController.text));
+                  multiPlayerLifeController.atualizarVidaInicial(
+                      int.parse(vidaInicialController.text));
 
                   Navigator.of(context).pop();
+                  ResetConfirmationModal.dialogBuilder(context);
                 },
               ),
             ],
