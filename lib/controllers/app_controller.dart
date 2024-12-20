@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppController extends ChangeNotifier {
   bool isRotated = false;
+  bool isColoredTilesActive = false;
   int rotacao = 0;
   int _buttonCount = 3;
 
@@ -31,6 +32,11 @@ class AppController extends ChangeNotifier {
       _buttonCount = value;
       notifyListeners();
     }
+  }
+
+  changeColoredTilesCheckbox(value) {
+    isColoredTilesActive = value;
+    notifyListeners();
   }
 }
 

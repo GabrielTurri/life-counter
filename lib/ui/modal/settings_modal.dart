@@ -42,7 +42,8 @@ class SettingsModal {
                     'Alterar quantidade de botões',
                     style: TextStyle(fontSize: 16),
                   ),
-                  const ButtonCountRadioButton()
+                  const ButtonCountRadioButton(),
+                  const ColoredTileCheckbox(),
                 ],
               ),
             ),
@@ -106,6 +107,24 @@ class ButtonCountRadioButton extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class ColoredTileCheckbox extends StatelessWidget {
+  const ColoredTileCheckbox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final appController = context.read<AppController>();
+
+    final appControllerData = context.watch<AppController>();
+
+    return CheckboxListTile(
+      value: appControllerData.isColoredTilesActive,
+      onChanged: (bool? value) =>
+          appController.changeColoredTilesCheckbox(value),
+      title: const Text('Colorir valores no histórico de vida'),
     );
   }
 }
