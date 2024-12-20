@@ -27,7 +27,7 @@ class ColorPickerModal {
 class buildColorPicker extends StatelessWidget {
   int playerIndex;
 
-  buildColorPicker(this.playerIndex);
+  buildColorPicker(this.playerIndex, {super.key});
 
   @override
   Widget build(BuildContext context) {

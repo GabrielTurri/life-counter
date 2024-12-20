@@ -9,7 +9,7 @@ class PlayerLife extends StatelessWidget {
   final Color? bgColor;
   final int playerIndex;
 
-  PlayerLife({
+  const PlayerLife({
     super.key,
     required this.lifeColor,
     required this.bgColor,

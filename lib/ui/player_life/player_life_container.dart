@@ -9,7 +9,7 @@ class PlayerLifeContainer extends StatelessWidget {
   final int initialLife;
   final int playerIndex;
 
-  PlayerLifeContainer({
+  const PlayerLifeContainer({
     super.key,
     required this.initialLife,
     required this.playerIndex,

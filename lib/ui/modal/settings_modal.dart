@@ -42,7 +42,7 @@ class SettingsModal {
                     'Alterar quantidade de botões',
                     style: TextStyle(fontSize: 16),
                   ),
-                  ButtonCountRadioButton()
+                  const ButtonCountRadioButton()
                 ],
               ),
             ),
